@@ -1,7 +1,22 @@
-export default function App(){
-    return(
-        <div>
-            <h1>Hello</h1>
-        </div>
-    )
+import MainScreen from "./components/MainScreen/MainScreen";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  useQuery,
+  gql,
+} from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: "https://fakerql.goosfraba.ro/graphql",
+  cache: new InMemoryCache()
+});
+
+export default function App() {
+
+  return (
+    <ApolloProvider client={client}>
+      <MainScreen />
+    </ApolloProvider>
+  );
 }
