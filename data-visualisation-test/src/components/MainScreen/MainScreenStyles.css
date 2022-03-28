@@ -1,0 +1,28 @@
+.container{
+    background-color: #570A9D;
+    height: 100vh;
+}
+
+.text {
+    color: white;
+}
+
+.pie {
+    color: red;
+    background-color: blue;
+}
+
+.container-chart {
+    margin-top: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.d3chart {
+    width: 60vw;
+    height: 75vh;
+    
+}
+
+.bar { fill: #1C0726; }
