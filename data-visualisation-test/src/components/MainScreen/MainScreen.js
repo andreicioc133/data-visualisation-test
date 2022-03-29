@@ -103,13 +103,14 @@ export default function MainScreen() {
       .domain([0, numberOfPostsToRender])
       .range([height, 0]);
 
-    svg
+    const bar = svg.selectAll("bar").data(postsToRender).enter().append("g")
+
+    bar
       .append("g")
       .call(d3.axisLeft(y))
       .attr("font-size", 15)
       .attr("color", "white");
 
-    const bar = svg.selectAll("bar").data(postsToRender).enter().append("g")
 
     bar
       .append("rect")
@@ -138,6 +139,7 @@ export default function MainScreen() {
           .attr("dx", "1.2em")
           .attr("fill", "white")
         .text(function(post) {return post.numberOfPosts}) 
+      
   }
 
   
@@ -201,11 +203,11 @@ export default function MainScreen() {
               if(countText <=0 ){
                 alert("Please input a valid number higher than 0!")
               }
-                else{
-              setCountSize(countText || 25)
-              formatPosts();
-              createChart();
-                }
+              else{
+                setCountSize(countText || 25)
+                formatPosts();
+                createChart();
+              }
             }}
           >
             FETCH DATA
