@@ -109,24 +109,38 @@ export default function MainScreen() {
       .attr("font-size", 15)
       .attr("color", "white");
 
-    svg
-      .selectAll(".bar")
-      .data(postsToRender)
-      .enter()
+    const bar = svg.selectAll("bar").data(postsToRender).enter().append("g")
+
+    bar
       .append("rect")
       .attr("class", "bar")
-      .attr("x", function (d) {
-        return x(d.month);
+      .attr("x", function (post) {
+        return x(post.month);
       })
       .attr("width", x.bandwidth() - 10)
       .attr("margin-left", "5px")
-      .attr("y", function (d) {
-        return y(d.numberOfPosts);
+      .attr("y", function (post) {
+        return y(post.numberOfPosts);
       })
-      .attr("height", function (d) {
-        return height - y(d.numberOfPosts);
-      });
+      .attr("height", function (post) {
+        return height - y(post.numberOfPosts);
+      })
+      
+      bar
+        .append("text")
+        .attr("x", function(d) {
+          return x(d.month) ;
+          })
+          .attr("y", function(d) {
+              return y(d.numberOfPosts)
+          })
+          .attr("dy", "2em")
+          .attr("dx", "1.2em")
+          .attr("fill", "white")
+        .text(function(post) {return post.numberOfPosts}) 
   }
+
+  
   
   useEffect(() => {
     let isMounted = true;
