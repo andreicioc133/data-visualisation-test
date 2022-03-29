@@ -37,11 +37,6 @@ export default function MainScreen() {
       return months.indexOf(a.month) - months.indexOf(b.month);
     });
   }
-
-  const handleSubmit = () => {
-    setCountSize(countText);
-  };
-
   function formatPosts() {
     if (loading) return;
     else {
