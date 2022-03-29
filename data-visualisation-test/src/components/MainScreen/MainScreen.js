@@ -38,10 +38,6 @@ export default function MainScreen() {
     });
   }
 
-  const handleSubmit = () => {
-    setCountSize(countText);
-  };
-
   function formatPosts() {
     if (loading) return;
     else {
@@ -69,10 +65,15 @@ export default function MainScreen() {
       bottom: 30,
       left: 30,
     };
+
     const width = parseInt(d3.select(".d3chart").style("width")) -  margin.left -  margin.right;
     const height =  parseInt(d3.select(".d3chart").style("height")) -  margin.top -  margin.bottom;
-    const svg = d3
-      .select(d3chart.current)
+
+    const svgEl = d3.select(d3chart.current)
+
+    svgEl.selectAll('*').remove()
+
+    const svg=svgEl
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.bottom + margin.top)
       .style("background-color", "#570A9D")
@@ -127,40 +128,38 @@ export default function MainScreen() {
         return height - y(d.numberOfPosts);
       });
   }
-
+  
   useEffect(() => {
-    if (postsToRender.length > 0) {
+    let isMounted = true;
+    if(isMounted){
       formatPosts();
+    if (postsToRender.length && !loading) {
       createChart();
     }
-  }, [loading, countSize]);
+  }
+    return () => {
+      isMounted = false
+    }
+  }, [loading, postsToRender.length, countSize, data]);
 
   if (error) console.log("Error from useQuery: ", error.message);
 
+  
+
   return (
     <Container fluid className="container">
-      <Button
-        variant="primary"
-        onClick={() => {
-          formatPosts();
-          createChart();
-        }}
-      >
-        FETCH DATA
-      </Button>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Number of posts:
-          <input
-            type="text"
-            value={countText}
-            onChange={(e) => setCountText(parseInt(e.target.value))}
-          />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>{" "}
+      <Row>
+        <Col className="titleContainer">
+          <h1 className="title">Data visualisation test application</h1>
+        </Col>
+      </Row>
+      
       {loading ? (
-        <h1>"Loading..."</h1>
+      <Row>
+        <Col className="titleContainer">
+          <h1 className="title">Loading...</h1>
+        </Col>
+      </Row>
       ) : (
         <Row className="container-chart">
           <Col className="d3chart">
@@ -168,6 +167,38 @@ export default function MainScreen() {
           </Col>
         </Row>
       )}
+      <Row>
+        <Col className="buttonInput">
+          <form className="form">
+            <label className="labelText">
+              Set number of posts:
+              <input
+                className="textInput"
+                type="text"
+                placeholder="No. of posts..."
+                pattern="\d*" 
+                value={countText}
+                onChange={(e) => setCountText(e.target.value.replace(/[^0-9.]/g, ''))}
+              />
+            </label>
+          </form>{" "}
+          <Button
+            className="btn"
+            onClick={() => {
+              if(countText <=0 ){
+                alert("Please input a valid number higher than 0!")
+              }
+                else{
+              setCountSize(countText || 25)
+              formatPosts();
+              createChart();
+                }
+            }}
+          >
+            FETCH DATA
+          </Button>
+        </Col>
+      </Row>
     </Container>
   );
 }

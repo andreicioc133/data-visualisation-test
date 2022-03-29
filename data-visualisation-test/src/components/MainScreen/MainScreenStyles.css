@@ -1,6 +1,16 @@
-.container{
+.container {
     background-color: #570A9D;
     height: 100vh;
+}
+
+.titleContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.title{
+    color: white;
+    margin-top: 4vh;
 }
 
 .text {
@@ -13,16 +23,75 @@
 }
 
 .container-chart {
-    margin-top: 5rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin: 0 15vw 0 15vw;
+    padding: 2.5vh 0 2.5vh 0;
 }
 
 .d3chart {
+    margin-top: 1rem;
     width: 60vw;
-    height: 75vh;
+    height: 60vh;
     
 }
 
-.bar { fill: #1C0726; }
+.bar { fill: #480675; }
+
+.buttonInput {
+    display: flex;
+    justify-content:center;
+    margin-top: 5vh;
+}
+
+.labelText{
+    color: white;
+    font-size: 20px;
+    padding-left: 0.35rem;
+}
+
+.form{
+    background-color: #480675;
+    height: 35px;
+    width: 23vw;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.75rem;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+.textInput::placeholder{
+    font-style: italic;
+}
+
+.textInput {
+    background-color: #480675;
+    border-color: #480675;
+    border-radius: 5px;
+    border-width: 0;
+    margin-left: 0.5rem;
+    color: white;
+    font-size: 18px;
+    width: 7rem;
+}
+
+input {
+    outline:none;
+   }
+
+.btn {
+    margin-left: 1rem;
+    color: white;
+    background-color: #480675;
+    border: 1px solid white;
+    border-radius: 5px;
+    outline: none;
+}
+
+h1 {
+    margin-top: 0rem;
+}
