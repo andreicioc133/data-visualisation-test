@@ -38,6 +38,10 @@ export default function MainScreen() {
     });
   }
 
+  const handleSubmit = () => {
+    setCountSize(countText);
+  };
+
   function formatPosts() {
     if (loading) return;
     else {
